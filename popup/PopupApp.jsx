@@ -1,4 +1,5 @@
 import { useTheme } from '../src/context/ThemeContext';
+import PrayerQuickView from '../src/components/prayer/PrayerQuickView';
 
 export default function PopupApp() {
   const { resolved } = useTheme();
@@ -14,11 +15,11 @@ export default function PopupApp() {
         </span>
       </header>
 
-      <div className="rounded-2xl p-4 bg-sakeenah-100/60 dark:bg-layl-900/60 border border-sakeenah-200 dark:border-layl-800">
-        <p className="text-sm text-sakeenah-700 dark:text-layl-200">
-          Foundation is live — prayer times &amp; quick todo view land here next.
-        </p>
-      </div>
+      <PrayerQuickView />
+
+      <p className="text-xs text-center text-sakeenah-400 dark:text-layl-500 mt-4">
+        Todo quick view lands here next milestone.
+      </p>
     </div>
   );
 }

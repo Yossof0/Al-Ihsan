@@ -1,11 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar, { TABS } from '../src/components/sidebar/Sidebar';
+import OnboardingApp from '../src/components/onboarding/OnboardingApp';
+import PrayerTimesTab from '../src/components/prayer/PrayerTimesTab';
+import { getSetting } from '../src/db';
 import { useTheme } from '../src/context/ThemeContext';
 
 export default function NewTabApp() {
   const [active, setActive] = useState('prayer');
+  const [onboardingDone, setOnboardingDone] = useState(null); // null = loading
   const { mode, resolved, setThemeMode } = useTheme();
   const current = TABS.find((t) => t.id === active);
+
+  useEffect(() => {
+    getSetting('onboardingComplete', false).then(setOnboardingDone);
+  }, []);
+
+  if (onboardingDone === null) return null; // avoid flash while checking IndexedDB
+  if (!onboardingDone) {
+    return <OnboardingApp onComplete={() => setOnboardingDone(true)} />;
+  }
 
   return (
     <div className="flex h-screen w-screen overflow-hidden">
@@ -33,12 +46,16 @@ export default function NewTabApp() {
           </div>
         </header>
 
-        <div className="rounded-2xl p-6 bg-white/70 dark:bg-layl-900/60 border border-sakeenah-200 dark:border-layl-800 shadow-sm">
-          <p className="text-sakeenah-700 dark:text-layl-200">
-            <strong>{current.label}</strong> tab — coming next milestone. Theme is currently resolved to{' '}
-            <strong>{resolved}</strong>.
-          </p>
-        </div>
+        {active === 'prayer' ? (
+          <PrayerTimesTab />
+        ) : (
+          <div className="rounded-2xl p-6 bg-white/70 dark:bg-layl-900/60 border border-sakeenah-200 dark:border-layl-800 shadow-sm">
+            <p className="text-sakeenah-700 dark:text-layl-200">
+              <strong>{current.label}</strong> tab — coming next milestone. Theme is currently resolved to{' '}
+              <strong>{resolved}</strong>.
+            </p>
+          </div>
+        )}
       </main>
     </div>
   );
