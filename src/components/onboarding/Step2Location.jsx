@@ -6,7 +6,7 @@ const CALC_METHODS = [
   { id: 'Karachi', label: 'University of Islamic Sciences, Karachi' },
 ];
 
-const PRAYERS = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+const PRAYERS = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
 export default function Step2Location({ data, update }) {
   const setOffset = (prayer, value) =>
@@ -51,7 +51,7 @@ export default function Step2Location({ data, update }) {
         <p className="text-xs font-semibold text-sakeenah-500 dark:text-layl-400 mb-2">
           Offsets (minutes) — optional, can leave at 0
         </p>
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid grid-cols-6 gap-1.5">
           {PRAYERS.map((p) => (
             <div key={p} className="flex flex-col items-center">
               <span className="text-[11px] capitalize text-sakeenah-500 dark:text-layl-400 mb-1">{p}</span>

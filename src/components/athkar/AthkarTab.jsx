@@ -41,6 +41,12 @@ export default function AthkarTab() {
     refresh();
   };
 
+  const updateThikr = async (item, patch) => {
+    const updated = { ...item, ...patch };
+    await putItem('athkar', updated);
+    setItems((prev) => prev.map((i) => (i.id === item.id ? updated : i)));
+  };
+
   const removeCategory = async (id) => {
     await deleteItem('athkarCategories', id);
     const itemsInCat = items.filter((i) => i.categoryId === id);
@@ -117,7 +123,7 @@ export default function AthkarTab() {
         )}
 
         {visibleItems.map((item) => (
-          <ThikrCard key={item.id} item={item} displayMode={item.displayMode || 'rect'} />
+          <ThikrCard key={item.id} item={item} onUpdate={updateThikr} />
         ))}
       </div>
 

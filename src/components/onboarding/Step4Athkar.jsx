@@ -24,7 +24,7 @@ export default function Step4Athkar({ data, update }) {
       </div>
 
       <p className="text-xs font-semibold text-sakeenah-500 dark:text-layl-400 mb-2">Theme</p>
-      <div className="flex gap-2">
+      <div className="flex gap-2 mb-6">
         {['auto', 'light', 'dark'].map((m) => (
           <button
             key={m}
@@ -35,6 +35,22 @@ export default function Step4Athkar({ data, update }) {
                 : 'bg-sakeenah-50 dark:bg-layl-800/60 text-sakeenah-700 dark:text-layl-200'}`}
           >
             {m}
+          </button>
+        ))}
+      </div>
+
+      <p className="text-xs font-semibold text-sakeenah-500 dark:text-layl-400 mb-2">Language</p>
+      <div className="flex gap-2">
+        {[{ id: 'en', label: 'English' }, { id: 'ar', label: 'العربية' }].map((l) => (
+          <button
+            key={l.id}
+            onClick={() => update({ language: l.id })}
+            className={`flex-1 px-3 py-2 rounded-xl text-sm font-semibold transition-colors
+              ${data.language === l.id
+                ? 'bg-sakeenah-500 dark:bg-layl-600 text-white'
+                : 'bg-sakeenah-50 dark:bg-layl-800/60 text-sakeenah-700 dark:text-layl-200'}`}
+          >
+            {l.label}
           </button>
         ))}
       </div>

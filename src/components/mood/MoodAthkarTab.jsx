@@ -19,9 +19,19 @@ export default function MoodAthkarTab() {
   useEffect(() => {
     seedAthkarIfNeeded().then(async () => {
       const [athkar, sibha] = await Promise.all([getAll('athkar'), getAll('sibha')]);
-      setAllItems([...athkar, ...sibha]);
+      setAllItems([
+        ...athkar.map((i) => ({ ...i, _store: 'athkar' })),
+        ...sibha.map((i) => ({ ...i, _store: 'sibha' })),
+      ]);
     });
   }, []);
+
+  const updateItem = async (item, patch) => {
+    const updated = { ...item, ...patch };
+    const { putItem } = await import('../../db');
+    await putItem(item._store, updated);
+    setAllItems((prev) => prev.map((i) => (i.id === item.id ? updated : i)));
+  };
 
   const matches = mood
     ? allItems.filter((i) => (i.moodTags || []).includes(mood)).sort((a, b) => a.order - b.order)
@@ -57,7 +67,7 @@ export default function MoodAthkarTab() {
 
       <div className="space-y-3">
         {matches.map((item) => (
-          <ThikrCard key={item.id} item={item} displayMode={item.displayMode || 'rect'} />
+          <ThikrCard key={item.id} item={item} onUpdate={updateItem} />
         ))}
       </div>
     </div>

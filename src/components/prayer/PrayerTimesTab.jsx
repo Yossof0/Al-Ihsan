@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { usePrayerTimes } from '../../hooks/usePrayerTimes';
 import { getSetting, setSetting } from '../../db';
 
-const LABELS = { fajr: 'Fajr', dhuhr: 'Dhuhr', asr: 'Asr', maghrib: 'Maghrib', isha: 'Isha' };
+const LABELS = { fajr: 'Fajr', sunrise: 'Shuruq', dhuhr: 'Dhuhr', asr: 'Asr', maghrib: 'Maghrib', isha: 'Isha' };
 const ADHAN_OPTIONS = [
   { id: 'mecca', label: 'Mecca' },
   { id: 'medina', label: 'Medina' },
@@ -18,8 +18,8 @@ export default function PrayerTimesTab() {
   const [adhanSound, setAdhanSound] = useState('mecca');
 
   useEffect(() => {
-    getSetting('prayerOffsets', { fajr: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }).then(setOffsets);
-    getSetting('prayerNotifPerPrayer', { fajr: true, dhuhr: true, asr: true, maghrib: true, isha: true }).then(setNotifPerPrayer);
+    getSetting('prayerOffsets', { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }).then(setOffsets);
+    getSetting('prayerNotifPerPrayer', { fajr: true, sunrise: false, dhuhr: true, asr: true, maghrib: true, isha: true }).then(setNotifPerPrayer);
     getSetting('adhanSound', 'mecca').then(setAdhanSound);
   }, []);
 

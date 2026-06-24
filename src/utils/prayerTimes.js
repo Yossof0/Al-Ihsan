@@ -10,7 +10,7 @@ const CALC_METHOD_IDS = {
   Karachi: 1,
 };
 
-const PRAYER_KEYS = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+const PRAYER_KEYS = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
 
 /**
  * Fetch today's prayer times.
@@ -72,8 +72,8 @@ export function getNextPrayer(times) {
   const now = new Date();
   const nowMinutes = now.getHours() * 60 + now.getMinutes();
 
-  const entries = PRAYER_KEYS.map((k) => k.toLowerCase())
-    .filter((k) => times[k])
+  const COUNTDOWN_KEYS = PRAYER_KEYS.filter((k) => k !== 'Sunrise').map((k) => k.toLowerCase());
+  const entries = COUNTDOWN_KEYS.filter((k) => times[k])
     .map((k) => {
       const [h, m] = times[k].split(':').map(Number);
       return { key: k, minutes: h * 60 + m };

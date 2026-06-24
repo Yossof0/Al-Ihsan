@@ -14,11 +14,12 @@ export default function OnboardingApp({ onComplete }) {
     locationMode: 'auto',     // 'auto' | 'manual'
     city: '',
     calcMethod: 'MWL',
-    offsets: { fajr: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 },
+    offsets: { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 },
     notificationsEnabled: false,
     adhanSound: 'mecca',
     athkarDensity: 'minimal', // 'minimal' | 'full'
     themePref: 'auto',
+    language: 'en',
   });
 
   const update = (patch) => setData((prev) => ({ ...prev, ...patch }));
@@ -36,6 +37,7 @@ export default function OnboardingApp({ onComplete }) {
       await setSetting('adhanSound', data.adhanSound);
       await setSetting('athkarDensity', data.athkarDensity);
       await setSetting('themeMode', data.themePref);
+      await setSetting('language', data.language);
       await setSetting('onboardingComplete', true);
       onComplete();
       return;

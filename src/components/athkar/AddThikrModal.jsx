@@ -115,23 +115,6 @@ export default function AddThikrModal({ open, onClose, onSave, categoryId, isSib
           </div>
         </Field>
 
-        <Field label="Display style">
-          <div className="flex gap-2">
-            {['rect', 'ring'].map((d) => (
-              <button
-                key={d}
-                onClick={() => set({ displayMode: d })}
-                className={`flex-1 px-3 py-2 rounded-xl text-sm font-semibold capitalize transition-colors
-                  ${form.displayMode === d
-                    ? 'bg-sakeenah-500 dark:bg-layl-600 text-white'
-                    : 'bg-sakeenah-50 dark:bg-layl-800 text-sakeenah-600 dark:text-layl-300'}`}
-              >
-                {d === 'rect' ? 'Rectangle' : 'Progress ring'}
-              </button>
-            ))}
-          </div>
-        </Field>
-
         <div className="flex justify-end gap-2 mt-4">
           <button onClick={onClose} className="px-4 py-2 rounded-xl text-sm font-semibold text-sakeenah-500 dark:text-layl-300">
             Cancel

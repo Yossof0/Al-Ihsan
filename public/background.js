@@ -1,8 +1,15 @@
 // public/background.js
-// MV3 service worker. Listens for chrome.alarms created by the reminder
-// scheduler (src/utils/reminderScheduler.js) and shows a notification with
-// the linked thikr's text. Talks to IndexedDB directly since service
-// workers can't import the React app's modules.
+// MV3 service worker. Opens the dashboard page on first install, and
+// listens for chrome.alarms created by the reminder scheduler
+// (src/utils/reminderScheduler.js) to show notifications with the linked
+// thikr's text. Talks to IndexedDB directly since service workers can't
+// import the React app's modules.
+
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === 'install') {
+    chrome.tabs.create({ url: chrome.runtime.getURL('newtab/index.html') });
+  }
+});
 
 const DB_NAME = 'al-ihsan';
 const DB_VERSION = 2;

@@ -1,6 +1,6 @@
 import { usePrayerTimes } from '../../hooks/usePrayerTimes';
 
-const LABELS = { fajr: 'Fajr', dhuhr: 'Dhuhr', asr: 'Asr', maghrib: 'Maghrib', isha: 'Isha' };
+const LABELS = { fajr: 'Fajr', sunrise: 'Shuruq', dhuhr: 'Dhuhr', asr: 'Asr', maghrib: 'Maghrib', isha: 'Isha' };
 
 export default function PrayerQuickView() {
   const { times, next, loading, error, reload } = usePrayerTimes();
@@ -34,7 +34,7 @@ export default function PrayerQuickView() {
         </p>
       </div>
 
-      <div className="grid grid-cols-5 gap-1.5">
+      <div className="grid grid-cols-6 gap-1">
         {Object.entries(LABELS).map(([key, label]) => (
           <div
             key={key}

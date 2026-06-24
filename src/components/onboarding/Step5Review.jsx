@@ -6,6 +6,7 @@ export default function Step5Review({ data }) {
     ['Adhan sound', data.adhanSound],
     ['Athkar', data.athkarDensity === 'minimal' ? 'Minimal set' : 'Full set'],
     ['Theme', data.themePref],
+    ['Language', data.language === 'ar' ? 'العربية' : 'English'],
   ];
 
   return (

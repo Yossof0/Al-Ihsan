@@ -10,9 +10,6 @@
   "background": {
     "service_worker": "background.js"
   },
-  "chrome_url_overrides": {
-    "newtab": "newtab/index.html"
-  },
   "permissions": [
     "storage",
     "notifications",

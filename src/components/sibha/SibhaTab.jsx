@@ -23,6 +23,12 @@ export default function SibhaTab() {
     refresh();
   };
 
+  const updateDua = async (item, patch) => {
+    const updated = { ...item, ...patch };
+    await putItem('sibha', updated);
+    setItems((prev) => prev.map((i) => (i.id === item.id ? updated : i)));
+  };
+
   return (
     <div className="space-y-3 animate-fade-in">
       <div className="flex justify-end">
@@ -41,7 +47,7 @@ export default function SibhaTab() {
       )}
 
       {items.map((item) => (
-        <ThikrCard key={item.id} item={item} displayMode={item.displayMode || 'ring'} />
+        <ThikrCard key={item.id} item={item} onUpdate={updateDua} />
       ))}
 
       <AddThikrModal
