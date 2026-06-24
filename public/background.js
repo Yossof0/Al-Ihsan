@@ -5,7 +5,7 @@
 // workers can't import the React app's modules.
 
 const DB_NAME = 'al-ihsan';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 function openDB() {
   return new Promise((resolve, reject) => {

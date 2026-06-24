@@ -7,6 +7,7 @@ import SibhaTab from '../src/components/sibha/SibhaTab';
 import MoodAthkarTab from '../src/components/mood/MoodAthkarTab';
 import ReminderTab from '../src/components/reminders/ReminderTab';
 import TodoBoard from '../src/components/todo/TodoBoard';
+import QuranTab from '../src/components/quran/QuranTab';
 import { getSetting } from '../src/db';
 import { useTheme } from '../src/context/ThemeContext';
 
@@ -57,7 +58,8 @@ export default function NewTabApp() {
         {active === 'mood' && <MoodAthkarTab />}
         {active === 'reminders' && <ReminderTab />}
         {active === 'todo' && <TodoBoard />}
-        {!['prayer', 'athkar', 'sibha', 'mood', 'reminders', 'todo'].includes(active) && (
+        {active === 'quran' && <QuranTab />}
+        {!['prayer', 'athkar', 'sibha', 'mood', 'reminders', 'todo', 'quran'].includes(active) && (
           <div className="rounded-2xl p-6 bg-white/70 dark:bg-layl-900/60 border border-sakeenah-200 dark:border-layl-800 shadow-sm">
             <p className="text-sakeenah-700 dark:text-layl-200">
               <strong>{current.label}</strong> tab — coming next milestone. Theme is currently resolved to{' '}

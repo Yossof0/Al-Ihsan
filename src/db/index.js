@@ -3,7 +3,7 @@
 // Single database, one object store per "table". No external deps.
 
 const DB_NAME = 'al-ihsan';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 // Object stores created on first install. Add new stores here and bump
 // DB_VERSION when you need a migration.
@@ -17,6 +17,7 @@ const STORES = [
   { name: 'todoColumns', keyPath: 'id' },
   { name: 'todoCards', keyPath: 'id' },
   { name: 'quranTranslations', keyPath: 'id' },    // downloaded translation packs
+  { name: 'quranArabic', keyPath: 'key' },         // cached Arabic text, keyed e.g. 'juz-1'
   { name: 'quranProgress', keyPath: 'key' },
 ];
 

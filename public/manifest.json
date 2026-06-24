@@ -17,10 +17,13 @@
     "storage",
     "notifications",
     "geolocation",
-    "alarms"
+    "alarms",
+    "downloads"
   ],
   "host_permissions": [
-    "https://api.aladhan.com/*"
+    "https://api.aladhan.com/*",
+    "https://api.alquran.cloud/*",
+    "https://cdn.islamic.network/*"
   ],
   "icons": {
     "16": "icons/icon16.png",
