@@ -1,0 +1,28 @@
+/* src/styles/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Lateef&family=Amiri&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply font-sans antialiased transition-colors duration-300;
+  @apply bg-sakeenah-50 text-sakeenah-900;
+}
+
+html.dark body {
+  @apply bg-layl-950 text-layl-50;
+}
+
+[lang="ar"], .font-arabic {
+  font-family: 'Lateef', 'Amiri', serif;
+}
+
+/* Smooth, consistent scrollbars across the dashboard */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { @apply bg-sakeenah-300 rounded-full; }
+html.dark ::-webkit-scrollbar-thumb { @apply bg-layl-700; }
