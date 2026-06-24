@@ -11,12 +11,14 @@ import QuranTab from '../src/components/quran/QuranTab';
 import SettingsTab from '../src/components/settings/SettingsTab';
 import { getSetting } from '../src/db';
 import { useTheme } from '../src/context/ThemeContext';
+import { useLanguage } from '../src/context/LanguageContext';
 
 export default function NewTabApp() {
   const [active, setActive] = useState('prayer');
   const [onboardingDone, setOnboardingDone] = useState(null); // null = loading
   const { mode, resolved, setThemeMode } = useTheme();
-  const current = TABS.find((t) => t.id === active);
+  const { t } = useLanguage();
+  const current = TABS.find((tab) => tab.id === active);
 
   useEffect(() => {
     getSetting('onboardingComplete', false).then(setOnboardingDone);
@@ -34,7 +36,7 @@ export default function NewTabApp() {
       <main className="flex-1 overflow-y-auto p-8 animate-fade-in">
         <header className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-extrabold text-sakeenah-800 dark:text-layl-100 flex items-center gap-2">
-            <span>{current.icon}</span> {current.label}
+            <span>{current.icon}</span> {t(current.key)}
           </h2>
 
           <div className="flex items-center gap-2 text-xs">

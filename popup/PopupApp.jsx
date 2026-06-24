@@ -1,4 +1,5 @@
 import { useTheme } from '../src/context/ThemeContext';
+import { useLanguage } from '../src/context/LanguageContext';
 import PrayerQuickView from '../src/components/prayer/PrayerQuickView';
 
 function openDashboard() {
@@ -12,12 +13,13 @@ function openDashboard() {
 
 export default function PopupApp() {
   const { resolved } = useTheme();
+  const { t } = useLanguage();
 
   return (
     <div className="p-5 animate-fade-in">
       <header className="flex items-center justify-between mb-4">
         <h1 className="text-lg font-extrabold text-sakeenah-700 dark:text-layl-200">
-          Al-Ihsan
+          {t('appName')}
         </h1>
         <div className="flex items-center gap-2">
           <span className="text-xs px-2 py-1 rounded-full bg-sakeenah-100 dark:bg-layl-800 text-sakeenah-700 dark:text-layl-200">

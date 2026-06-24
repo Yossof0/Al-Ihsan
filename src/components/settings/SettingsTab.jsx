@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react';
 import { getSetting, setSetting } from '../../db';
 import { useTheme } from '../../context/ThemeContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function SettingsTab() {
   const { mode, setThemeMode } = useTheme();
-  const [language, setLanguage] = useState('en');
+  const { language, setLanguage: updateLanguage, t } = useLanguage();
   const [athkarDensity, setAthkarDensity] = useState('minimal');
   const [locationMode, setLocationMode] = useState('auto');
   const [city, setCity] = useState('');
 
   useEffect(() => {
-    getSetting('language', 'en').then(setLanguage);
     getSetting('athkarDensity', 'minimal').then(setAthkarDensity);
     getSetting('locationMode', 'auto').then(setLocationMode);
     getSetting('city', '').then(setCity);
   }, []);
 
-  const updateLanguage = (l) => { setLanguage(l); setSetting('language', l); };
   const updateDensity = (d) => { setAthkarDensity(d); setSetting('athkarDensity', d); };
   const updateLocationMode = (m) => { setLocationMode(m); setSetting('locationMode', m); };
   const updateCity = (c) => { setCity(c); setSetting('city', c); };
 
   return (
     <div className="space-y-6 animate-fade-in max-w-xl">
-      <SettingBlock title="Language">
+      <SettingBlock title={t('settings_language')}>
         <Pills
           options={[{ id: 'en', label: 'English' }, { id: 'ar', label: 'العربية' }]}
           value={language}
@@ -31,7 +30,7 @@ export default function SettingsTab() {
         />
       </SettingBlock>
 
-      <SettingBlock title="Theme">
+      <SettingBlock title={t('settings_theme')}>
         <Pills
           options={[{ id: 'auto', label: 'Auto' }, { id: 'light', label: 'Light' }, { id: 'dark', label: 'Dark' }]}
           value={mode}
@@ -39,7 +38,7 @@ export default function SettingsTab() {
         />
       </SettingBlock>
 
-      <SettingBlock title="Location">
+      <SettingBlock title={t('settings_location')}>
         <Pills
           options={[{ id: 'auto', label: 'Automatic' }, { id: 'manual', label: 'Manual city' }]}
           value={locationMode}
@@ -55,7 +54,7 @@ export default function SettingsTab() {
         )}
       </SettingBlock>
 
-      <SettingBlock title="Athkar density">
+      <SettingBlock title={t('settings_athkar_density')}>
         <Pills
           options={[{ id: 'minimal', label: 'Minimal' }, { id: 'full', label: 'Full set' }]}
           value={athkarDensity}

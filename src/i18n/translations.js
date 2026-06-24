@@ -1,0 +1,53 @@
+// src/i18n/translations.js
+export const translations = {
+  en: {
+    appName: 'Al-Ihsan',
+    tab_prayer: 'Prayer Times',
+    tab_quran: 'Quran',
+    tab_athkar: 'Athkar',
+    tab_sibha: 'Sibha',
+    tab_mood: 'Mood Athkar',
+    tab_reminders: 'Thikr Reminder',
+    tab_todo: 'Todo',
+    tab_settings: 'Settings',
+    next_prayer: 'Next prayer',
+    settings_language: 'Language',
+    settings_theme: 'Theme',
+    settings_location: 'Location',
+    settings_athkar_density: 'Athkar density',
+    add_thikr: '+ Thikr',
+    add_dua: '+ Dua',
+    add_category: '+ Category',
+    add_reminder: '+ Reminder',
+    add_column: '+ Add column',
+    pick_thikr: 'Pick thikr',
+    mood_prompt: "How are you feeling right now? Pick a mood and we'll surface athkar and duas suited to it.",
+  },
+  ar: {
+    appName: 'الإحسان',
+    tab_prayer: 'مواقيت الصلاة',
+    tab_quran: 'القرآن',
+    tab_athkar: 'الأذكار',
+    tab_sibha: 'السبحة',
+    tab_mood: 'أذكار المزاج',
+    tab_reminders: 'تذكير بالذكر',
+    tab_todo: 'المهام',
+    tab_settings: 'الإعدادات',
+    next_prayer: 'الصلاة القادمة',
+    settings_language: 'اللغة',
+    settings_theme: 'المظهر',
+    settings_location: 'الموقع',
+    settings_athkar_density: 'كثافة الأذكار',
+    add_thikr: '+ ذكر',
+    add_dua: '+ دعاء',
+    add_category: '+ تصنيف',
+    add_reminder: '+ تذكير',
+    add_column: '+ إضافة عمود',
+    pick_thikr: 'اختر الذكر',
+    mood_prompt: 'كيف تشعر الآن؟ اختر مزاجًا وسنعرض لك أذكارًا وأدعية تناسبه.',
+  },
+};
+
+export function t(key, lang = 'en') {
+  return translations[lang]?.[key] ?? translations.en[key] ?? key;
+}

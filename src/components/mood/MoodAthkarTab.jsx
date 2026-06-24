@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAll } from '../../db';
 import { seedAthkarIfNeeded } from '../../utils/seedAthkar';
 import ThikrCard from '../athkar/ThikrCard';
+import { useLanguage } from '../../context/LanguageContext';
 
 const MOODS = [
   { id: 'happy', label: 'Happy', icon: '😊' },
@@ -15,6 +16,7 @@ const MOODS = [
 export default function MoodAthkarTab() {
   const [mood, setMood] = useState(null);
   const [allItems, setAllItems] = useState([]);
+  const { t } = useLanguage();
 
   useEffect(() => {
     seedAthkarIfNeeded().then(async () => {
@@ -40,7 +42,7 @@ export default function MoodAthkarTab() {
   return (
     <div className="animate-fade-in">
       <p className="text-sm text-sakeenah-600 dark:text-layl-300 mb-4">
-        How are you feeling right now? Pick a mood and we'll surface athkar and duas suited to it.
+        {t('mood_prompt')}
       </p>
 
       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-6">

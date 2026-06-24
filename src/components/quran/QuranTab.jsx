@@ -87,6 +87,16 @@ export default function QuranTab() {
   if (loading) return <p className="text-sakeenah-500 dark:text-layl-400 animate-pulse">Loading Quran text…</p>;
   if (error) return <p className="text-amber-600">{error}</p>;
 
+  const surahGroups = [];
+  for (const a of ayahs) {
+    let group = surahGroups.find((g) => g.surahNumber === a.surahNumber);
+    if (!group) {
+      group = { surahNumber: a.surahNumber, surahName: a.surahName, ayahs: [] };
+      surahGroups.push(group);
+    }
+    group.ayahs.push(a);
+  }
+
   return (
     <div className="space-y-5 animate-fade-in">
       {/* Reader controls */}
@@ -160,31 +170,40 @@ export default function QuranTab() {
         </div>
       )}
 
-      {/* Reader */}
-      <div className="rounded-2xl p-6 bg-white dark:bg-layl-900/60 border border-sakeenah-200 dark:border-layl-800">
-        <div
-          dir="rtl"
-          style={{ fontFamily, fontSize: `${fontSize}px` }}
-          className="leading-loose text-sakeenah-900 dark:text-layl-50 space-y-1"
-        >
-          {ayahs.map((a) => (
-            <span key={a.number} className="inline">
-              {a.text}{' '}
-              <span className="text-sakeenah-400 dark:text-layl-500 text-base">({a.numberInSurah})</span>{' '}
-            </span>
-          ))}
-        </div>
+      {/* Reader — grouped by surah */}
+      <div className="rounded-2xl p-6 bg-white dark:bg-layl-900/60 border border-sakeenah-200 dark:border-layl-800 space-y-8">
+        {surahGroups.map((group) => (
+          <div key={group.surahNumber}>
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-sakeenah-200 dark:border-layl-800">
+              <div>
+                <p className="text-lg font-extrabold text-sakeenah-800 dark:text-layl-100">
+                  {group.surahNumber}. {group.surahName}
+                </p>
+                <p className="text-xs text-sakeenah-400 dark:text-layl-500">{group.ayahs.length} ayahs in this section</p>
+              </div>
+            </div>
 
-        {activeTranslation && (
-          <div className="mt-6 pt-6 border-t border-sakeenah-200 dark:border-layl-800 space-y-2 text-left" dir="ltr">
-            {ayahs.map((a) => (
-              <p key={a.number} className="text-sm text-sakeenah-600 dark:text-layl-300">
-                <span className="font-semibold text-sakeenah-400 dark:text-layl-500">{a.numberInSurah}.</span>{' '}
-                {translationFor(a.number) || '…'}
-              </p>
-            ))}
+            <div dir="rtl" style={{ fontFamily, fontSize: `${fontSize}px` }} className="leading-loose text-sakeenah-900 dark:text-layl-50">
+              {group.ayahs.map((a) => (
+                <span key={a.number} className="inline">
+                  {a.text}{' '}
+                  <span className="text-sakeenah-400 dark:text-layl-500 text-base">({a.numberInSurah})</span>{' '}
+                </span>
+              ))}
+            </div>
+
+            {activeTranslation && (
+              <div className="mt-5 pt-5 border-t border-sakeenah-200 dark:border-layl-800 space-y-2 text-left" dir="ltr">
+                {group.ayahs.map((a) => (
+                  <p key={a.number} className="text-sm text-sakeenah-600 dark:text-layl-300">
+                    <span className="font-semibold text-sakeenah-400 dark:text-layl-500">{a.numberInSurah}.</span>{' '}
+                    {translationFor(a.number) || '…'}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        ))}
       </div>
     </div>
   );
