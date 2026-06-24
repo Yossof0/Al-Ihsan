@@ -7,6 +7,9 @@
     "default_popup": "popup/index.html",
     "default_title": "Al-Ihsan"
   },
+  "background": {
+    "service_worker": "background.js"
+  },
   "chrome_url_overrides": {
     "newtab": "newtab/index.html"
   },
